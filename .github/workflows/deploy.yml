@@ -17,3 +17,12 @@ jobs:
 
       - run: which ansible
       - run: ansible --version
+      - run: echo $GITHUB_SHA
+
+      - run: echo $ANSIBLE_VAULT_PASS > tools/ansible/.vault-pass.txt
+      - run: >
+          ansible-playbook tools/ansible/deploy.yml
+          -i tools/ansible/hosts.ini
+          -e "git_branch=master"
+          --vault-password-file=tools/ansible/.vault-pass.txt
+      - run: rm ./ansible/.vault-pass.txt
