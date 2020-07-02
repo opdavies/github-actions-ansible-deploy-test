@@ -20,6 +20,8 @@ jobs:
       - run: echo $GITHUB_SHA
 
       - run: ansible all -m ping -i tools/ansible/hosts.ini
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: no
 
       # - run: echo ${{ secrets.ANSIBLE_VAULT_PASS }} > tools/ansible/.vault-pass.txt
       # - run: >
