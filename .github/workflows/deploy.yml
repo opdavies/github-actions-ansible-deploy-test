@@ -19,7 +19,7 @@ jobs:
       - run: ansible --version
       - run: echo $GITHUB_SHA
 
-      - run: echo $ANSIBLE_VAULT_PASS > tools/ansible/.vault-pass.txt
+      - run: echo ${{ secrets.ANSIBLE_VAULT_PASS }} > tools/ansible/.vault-pass.txt
       - run: >
           ansible-playbook tools/ansible/deploy.yml
           -i tools/ansible/hosts.ini
