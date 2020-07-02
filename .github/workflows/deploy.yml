@@ -25,14 +25,14 @@ jobs:
           name: id_rsa
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
-      - run: ansible all -m ping -i tools/ansible/hosts.ini
-        env:
-          ANSIBLE_HOST_KEY_CHECKING: no
+      # - run: ansible all -m ping -i tools/ansible/hosts.ini
+      #   env:
+      #     ANSIBLE_HOST_KEY_CHECKING: no
 
-      # - run: echo ${{ secrets.ANSIBLE_VAULT_PASS }} > tools/ansible/.vault-pass.txt
-      # - run: >
-      #     ansible-playbook tools/ansible/deploy.yml
-      #     -i tools/ansible/hosts.ini
-      #     -e "app_version=$GITHUB_SHA"
-      #     --vault-password-file=tools/ansible/.vault-pass.txt
-      # - run: rm tools/ansible/.vault-pass.txt
+      - run: echo ${{ secrets.ANSIBLE_VAULT_PASS }} > tools/ansible/.vault-pass.txt
+      - run: >
+          ansible-playbook tools/ansible/deploy.yml
+          -i tools/ansible/hosts.ini
+          -e "app_version=$GITHUB_SHA"
+          --vault-password-file=tools/ansible/.vault-pass.txt
+      - run: rm tools/ansible/.vault-pass.txt
