@@ -19,13 +19,11 @@ jobs:
       - run: ansible --version
       - run: echo $GITHUB_SHA
 
-      - run: |
-          mkdir ~/.ssh
-          echo $SSH_PRIVATE_KEY > ~/.ssh/id_rsa
-          sudo chmod 600 ~/.ssh/id_rsa
-        shell: bash
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      - uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
       - run: ansible all -m ping -i tools/ansible/hosts.ini
         env:
