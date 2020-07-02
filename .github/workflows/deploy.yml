@@ -12,6 +12,9 @@ jobs:
 
     name: Deploy via Ansible
 
+    env:
+      ANSIBLE_HOST_KEY_CHECKING: no
+
     steps:
       - uses: actions/checkout@v2
 
@@ -27,7 +30,7 @@ jobs:
 
       # - run: ansible all -m ping -i tools/ansible/hosts.ini
       #   env:
-      #     ANSIBLE_HOST_KEY_CHECKING: no
+      #     
 
       - run: echo ${{ secrets.ANSIBLE_VAULT_PASS }} > tools/ansible/.vault-pass.txt
       - run: >
