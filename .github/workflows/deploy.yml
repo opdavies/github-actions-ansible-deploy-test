@@ -25,4 +25,4 @@ jobs:
           -i tools/ansible/hosts.ini
           -e "app_version=$GITHUB_SHA"
           --vault-password-file=tools/ansible/.vault-pass.txt
-      - run: rm ./ansible/.vault-pass.txt
+      - run: rm tools/ansible/.vault-pass.txt
