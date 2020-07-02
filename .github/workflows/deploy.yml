@@ -23,6 +23,6 @@ jobs:
       - run: >
           ansible-playbook tools/ansible/deploy.yml
           -i tools/ansible/hosts.ini
-          -e "git_branch=master"
+          -e "app_version=$GITHUB_SHA"
           --vault-password-file=tools/ansible/.vault-pass.txt
       - run: rm ./ansible/.vault-pass.txt

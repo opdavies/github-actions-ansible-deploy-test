@@ -1,0 +1,9 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Update the code
+      git:
+        repo: https://github.com/opdavies/github-actions-ansible-deploy-test.git
+        dest: /tmp/ansible-test
+        version: '{{ app_version }}'
